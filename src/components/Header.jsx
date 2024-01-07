@@ -1,23 +1,23 @@
 import React from "react";
 
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import {Nav, Navbar, Button} from 'react-bootstrap';
+
 
 function Header() {
   return (
-    <>
-      <Navbar bg="light" data-bs-theme="light">
-        <Container>
-          <Navbar.Brand href="/">LOGO</Navbar.Brand>
-          <Nav className="justify-content-end">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
+    <Navbar data-bs-theme="light">
+        <Container className="bg-white">
+            <Navbar.Brand href="/" className="fs-2 fw-bolt my-auto">LOGO</Navbar.Brand>
+            <Nav className="justify-content-end">
+                <Nav.Link href="#above-us" className="my-auto">Above us</Nav.Link>
+                <Nav.Link href="#contacts" className="my-auto">Contacts</Nav.Link>
+                <Button className="rounded-pill my-auto py-1 ms-3 bg-orange">
+                    <Nav.Link href="#login">Login</Nav.Link>
+                </Button>
+            </Nav>
         </Container>
-      </Navbar>
-    </>
+    </Navbar>
   );
 }
 

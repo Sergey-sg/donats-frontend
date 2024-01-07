@@ -1,0 +1,11 @@
+// change the theme
+$theme-colors: (
+  "super-light-blue": #ECF7FF,
+  "light-blue": #ADDCFF,
+  "orange": #F58F4C,
+  "gray": #F7F7F7,
+  "white": #FFFFFF,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
