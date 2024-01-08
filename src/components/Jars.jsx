@@ -1,13 +1,13 @@
-import { Card, Button, Nav, Row, ProgressBar } from "react-bootstrap";
-import { FaCoins, FaBullseye } from "react-icons/fa";
+import { Card, Button, Nav, Row } from "react-bootstrap";
+import jarWithCoins from "../assets/images/jar-with-coins.png";
+import StatusJar from "./StatusJar";
 
 const jars_test = [
   {
     id: 81,
     monobank_id: "12rtyfg6вhjhаghghjh",
     title: "Savings Jar with album images PUT",
-    description:
-      "Description of jar",
+    description: "Description of jar",
     tags: [{ id: 1, name: "drons" }],
     volunteer: "Serhii",
     title_img:
@@ -95,45 +95,31 @@ const jars_test = [
 ];
 
 const Jars = () => {
-  function get_percentage(current_sum, goal) {
-    return (current_sum / goal) * 100;
-  }
-
   return (
     <Row className="justify-content-center mb-6">
       {jars_test?.map((jar) => (
         <Card key={jar.id} style={{ width: "25rem" }} className="mx-1 my-2">
-          {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
           <Card.Body className="vstack gap-3">
             <Card.Title className="fs-6 fw-bolt">{jar.volunteer}</Card.Title>
-            <Card.Text className="text-center fs-4 mb-0 card-custom-height">
-              {jar.title}
-            </Card.Text>
-            <div className="vstack gap-2">
-              <div className="fs-6 text-end">
-                <span>{Math.round(get_percentage(jar.current_sum, jar.goal))}%</span>
-                <ProgressBar now={get_percentage(jar.current_sum, jar.goal)} />
-              </div>
-              <div className="bg-gray py-1 text-center rounded-2 my-2 d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center ms-4">
-                  <FaCoins className="mx-2" />
-                  <div>
-                    <div>collected</div>
-                    <div>{jar.current_sum}</div>
-                  </div>
-                </div>
-                <div className="d-flex align-items-center me-4">
-                  <FaBullseye className="mx-2" />
-                  <div>
-                    <div>goal</div>
-                    <div>{jar.goal}</div>
-                  </div>
-                </div>
-              </div>
-              <Card.Text className="fs-6 mb-auto">
-                {jar.description.slice(0, 100)}{jar.description.length < 100 ? '' : '...'}
+            <img
+              src={jarWithCoins}
+              className="w-25 mx-auto"
+              alt="Jar with coins"
+            />
+            <Nav.Link href={`/jar-detail/${jar.id}`}>
+              <Card.Text className="text-center fs-4 mb-0 card-custom-height">
+                {jar.title}
               </Card.Text>
-              <Button className="bg-orange w-100 rounded-pill">
+            </Nav.Link>
+            <div className="vstack gap-2">
+              <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
+              <Nav.Link href={`/jar-detail/${jar.id}`} className="fs-6 mb-auto">
+                <Card.Text>
+                  {jar.description.slice(0, 100)}
+                  {jar.description.length < 100 ? "" : "..."}
+                </Card.Text>
+              </Nav.Link>
+              <Button className="bg-orange w-100 rounded-pill mt-2">
                 <Nav.Link href="#donate">donate to a good cause</Nav.Link>
               </Button>
             </div>

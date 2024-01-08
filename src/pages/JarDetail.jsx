@@ -1,3 +1,8 @@
+// import React, { useEffect, useRef } from 'react'
+// import { useParams } from 'react-router-dom'
+import ImageList from "../components/ImageList";
+import Container from 'react-bootstrap/Container';
+
 const test_jar = {
   id: 85,
   monobank_id: "12rtyfg6вhjhаghdfghcбвдрн",
@@ -34,3 +39,15 @@ const test_jar = {
   current_sum: 3400,
   date_added: "2024-01-06T11:47:36.401951+02:00",
 };
+
+const JarDetail = () => {
+  // const { jarId } = useParams()
+
+  return (
+    <Container className='bg-super-light-blue pb-4'>
+      <ImageList images={test_jar.album}/>
+    </Container>
+    );
+};
+
+export default JarDetail;

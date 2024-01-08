@@ -5,11 +5,20 @@ $theme-colors: (
   "orange": #F58F4C,
   "gray": #F7F7F7,
   "white": #FFFFFF,
+  "teal-400": #4DD4AC,
 );
 
 .card-custom-height {
   height: 2.5rem;
   line-height: 1.5rem;
+}
+
+blur-container {
+  backdrop-filter: blur(8px);
+}
+
+.blurred-image {
+  filter: blur(1px);
 }
 
 // Import Bootstrap and its default variables
