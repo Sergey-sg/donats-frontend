@@ -7,5 +7,10 @@ $theme-colors: (
   "white": #FFFFFF,
 );
 
+.card-custom-height {
+  height: 2.5rem;
+  line-height: 1.5rem;
+}
+
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';

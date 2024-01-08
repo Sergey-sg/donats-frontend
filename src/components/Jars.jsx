@@ -35,7 +35,7 @@ const jars_test = [
   {
     id: 83,
     monobank_id: "12rtyfg6вhjhаghdfghjjk",
-    title: "Savings Jar with album images 4",
+    title: "The quick brown fox jumps over the lazy dog. 1234567890!@#$%^&*()",
     description:
       "In by an appetite no humoured returned informed. Possession so comparison inquietude he he conviction no decisively. Marianne jointure attended she hastened surprise but she. Ever lady son yet you very paid form away. He advantage of exquisite resolving if on tolerably. Become sister on in garden it barton waited on.",
     tags: [{ id: 2, name: "test" }],
@@ -50,7 +50,7 @@ const jars_test = [
   {
     id: 84,
     monobank_id: "12rtyfg6вhjhаghdfghcvcvb",
-    title: "Savings Jar with album images 5",
+    title: "The quick brown fox jumps over 1234567890!@#$%^&*()",
     description:
       "In by an appetite no humoured returned informed. Possession so comparison inquietude he he conviction no decisively. Marianne jointure attended she hastened surprise but she. Ever lady son yet you very paid form away. He advantage of exquisite resolving if on tolerably. Become sister on in garden it barton waited on.",
     tags: [{ id: 2, name: "test" }],
@@ -106,12 +106,14 @@ const Jars = () => {
           {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
           <Card.Body className="vstack gap-3">
             <Card.Title className="fs-6 fw-bolt">{jar.volunteer}</Card.Title>
-            <Card.Text className="text-center fs-4">{jar.title}</Card.Text>
-            <div className="vstack gap-3">
-              <div className="fs-6 fw-bold text-end">
-                {Math.round(get_percentage(jar.current_sum, jar.goal))}%
+            <Card.Text className="text-center fs-4 mb-0 card-custom-height">
+              {jar.title}
+            </Card.Text>
+            <div className="vstack gap-2">
+              <div className="fs-6 text-end">
+                <span>{Math.round(get_percentage(jar.current_sum, jar.goal))}%</span>
+                <ProgressBar now={get_percentage(jar.current_sum, jar.goal)} />
               </div>
-              <ProgressBar now={get_percentage(jar.current_sum, jar.goal)} />
               <div className="bg-gray py-1 text-center rounded-2 my-2 d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center ms-4">
                   <FaCoins className="mx-2" />
