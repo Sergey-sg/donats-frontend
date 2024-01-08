@@ -7,15 +7,13 @@ import Jars from '../components/Jars'
 const Home = () => {
 
   return (
-    <>
-        <Container className='bg-super-light-blue pb-4'>
-            <br />
-            <Banner />
-            <br />
-            <Statistic />
-            <Jars />
-        </Container>
-    </>
+    <Container className='bg-super-light-blue pb-4'>
+        <br />
+        <Banner />
+        <br />
+        <Statistic />
+        <Jars />
+    </Container>
   );
 };
 

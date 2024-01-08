@@ -5,18 +5,26 @@ const banner_test = [{"id":81,"monobank_id":"12rtyfg6вhjhаghghjh","title":"Sav
 
 function Banner() {
   return (
-    <Carousel data-bs-theme="dark" className='vh-25'>
-    {banner_test?.map((jar) => (
+    <Carousel data-bs-theme="dark">
+      {banner_test?.map((jar) => (
         <Carousel.Item interval={5000} key={jar.id}>
-            <Image fluid src={jar.title_img} alt={jar.img_alt} className='h-100'/>
-            <Carousel.Caption>
-                <h3>{jar.title}</h3>
-                {jar.tags?.map((tag) => (
-                    <div key={tag.id}>{tag.name}</div>
-                ))}
-            </Carousel.Caption>
+          <div className="d-flex justify-content-center align-items-center">
+            <Image
+              src={jar.title_img}
+              alt={jar.img_alt}
+              fluid
+              className='object-fit-cover w-auto'
+              style={{ maxHeight: '40vh' }}
+            />
+          </div>
+          <Carousel.Caption className="text-dark">
+            <h3>{jar.title}</h3>
+            {jar.tags?.map((tag) => (
+              <div key={tag.id}>{tag.name}</div>
+            ))}
+          </Carousel.Caption>
         </Carousel.Item>
-        ))}
+      ))}
     </Carousel>
   );
 }
