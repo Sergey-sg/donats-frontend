@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useParams } from 'react-router-dom'
 import ImageList from "../components/ImageList";
-import Container from 'react-bootstrap/Container';
+import { Container, Row, Button, Nav } from 'react-bootstrap';
 import { fetchGetJarById } from "../redux/jar/jarActions"
+import StatusJar from '../components/StatusJar';
 
 
 const JarDetail = () => {
@@ -18,10 +19,21 @@ const JarDetail = () => {
   }, [dispatch, jarId]);
 
   return (
-    <Container className='bg-super-light-blue pb-4'>
-      <br />
-      <p>{jar.description}</p>
-      <ImageList images={jar.album}/>
+    <Container className='bg-super-light-blue pb-4 pt-4'>
+      <Row>
+        <div className='w-75'>
+          <div className="text-start fs-5 ps-3">{jar.volunteer}</div>
+          <br />
+          <p className="text">{jar.description}</p>
+          <ImageList images={jar.album}/>
+        </div>
+        <div className='w-25 pe-5 pt-5'>
+          <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
+          <Button className="bg-orange w-100 rounded-pill mt-2">
+            <Nav.Link href="#donate">donate to a good cause</Nav.Link>
+          </Button>
+        </div>
+      </Row>
     </Container>
     );
 };

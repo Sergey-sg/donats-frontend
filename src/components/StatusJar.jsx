@@ -15,14 +15,14 @@ const StatusJar = ({ currentSum, goal }) => {
           <FaCoins className="mx-2" />
           <div>
             <div>collected</div>
-            <div>{currentSum}</div>
+            <div>{currentSum || 0}</div>
           </div>
         </div>
         <div className="d-flex align-items-center me-4">
           <FaBullseye className="mx-2" />
           <div>
             <div>goal</div>
-            <div>{goal}</div>
+            <div>{goal || 0}</div>
           </div>
         </div>
       </div>
