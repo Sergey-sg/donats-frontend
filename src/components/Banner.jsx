@@ -1,5 +1,6 @@
-import { Carousel, Image, Button, Nav } from "react-bootstrap";
+import { Carousel, Image, Nav } from "react-bootstrap";
 import StatusJar from "./StatusJar";
+import ButtonOnHover from "./ButtonOnHover";
 
 const banner_test = [
   {
@@ -114,9 +115,13 @@ function Banner() {
               </Nav.Link>
               <div className="w-25 ms-5 ps-4">
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
-                <Button className="bg-orange rounded-pill mt-2 w-100 justify-content-start">
+                <ButtonOnHover
+                  defaultBg={"btn-outline-secondary"} 
+                  hoverBg={"bg-light"}
+                  className="text-black border-secondary rounded-pill mt-2 w-100 justify-content-start"
+                >
                   <Nav.Link href="#donate">donate to a good cause</Nav.Link>
-                </Button>
+                </ButtonOnHover>
               </div>
             </Carousel.Caption>
           </div>

@@ -14,6 +14,7 @@ const ImageList = ({ images }) => {
 
   return (
     <Row>
+      <div className="text-start fs-3">Album</div>
       {images?.map((image) => (
         <Image
           key={image.id}
