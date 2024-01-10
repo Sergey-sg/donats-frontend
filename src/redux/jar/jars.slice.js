@@ -5,6 +5,10 @@ export const jarsSlice = createSlice({
   initialState: [],
   reducers: {
     initialJars: (state, action) => (action.payload),
+    addNewPageOfJars: (state, action) => [
+      ...state,
+      ...action.payload,
+    ],
   },
 });
 

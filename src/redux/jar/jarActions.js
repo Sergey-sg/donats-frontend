@@ -2,14 +2,19 @@ import { initialJar } from "./jar.slice";
 import { api } from "../../axios/axios";
 import { initialJars } from "./jars.slice";
 import { initialBanner } from "./banner.slice";
+import queryString from 'query-string'
 
-const getJarById = (jarId) => {
-  return api.get(`jars/${jarId}/`);
-};
+const getJarById = (jarId) => (api.get(`jars/${jarId}/`));
 
-const getJars = () => api.get("jars/");
+const getAllJars = (filtersParams) => {
+  const parsed = queryString.parse(window.location.search)
 
-const getJarsForBanner = () => api.get("jars/banner/");
+  parsed.page = filtersParams.page || ""
+
+  return api.get(`/jars?${queryString.stringify(parsed)}`)
+}
+
+const getJarsForBanner = () => (api.get("jars/banner/"));
 
 export const fetchGetJarById = (jarId) => {
   return async (dispatch) => {
@@ -30,10 +35,10 @@ export const fetchGetJarById = (jarId) => {
   };
 };
 
-export const fetchGetJars = () => {
+export const fetchGetAllJars = (filtersParams) => {
   return async (dispatch) => {
     try {
-      const response = await getJars();
+      const response = await getAllJars(filtersParams);
 
       dispatch(initialJars(response?.data));
     } catch (e) {

@@ -1,12 +1,21 @@
+import { useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { Carousel, Image, Nav } from "react-bootstrap";
 import StatusJar from "./StatusJar";
 import ButtonOnHover from "./ButtonOnHover";
+import { useAppDispatch } from "../redux/hooks";
+import { fetchGetJarsForBanner } from "../redux/jar/jarActions";
 
 
 
 function Banner() {
+  const dispatch = useAppDispatch();
   const banner = useAppSelector((state) => state.banner)
+
+  useEffect(() => {
+    console.log("start useEffect banner in Home");
+    dispatch(fetchGetJarsForBanner())
+  }, [dispatch]);
 
   return (
     <Carousel data-bs-theme="light">
