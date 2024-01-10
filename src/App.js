@@ -11,14 +11,14 @@ import JarDetail from "./pages/JarDetail";
 
 function App() {
   return (
-    <>
+    <div className="min-vh-100 vstack bg-super-light-blue mx-5">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={"jar-detail/:jarId"} element={<JarDetail />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 

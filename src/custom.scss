@@ -13,13 +13,17 @@ $theme-colors: (
   line-height: 1.5rem;
 }
 
-blur-container {
-  backdrop-filter: blur(8px);
-}
-
 .blurred-image {
-  filter: blur(1px);
+  filter: blur(3px);
 }
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+
+.carousel-control-prev, .carousel-control-next {
+  width: 10%;
+}
+
+.bg-transparent-black {
+  background-color: rgba(32, 31, 31, 0.205);
+}

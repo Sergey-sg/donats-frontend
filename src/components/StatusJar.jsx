@@ -10,15 +10,15 @@ const StatusJar = ({ currentSum, goal }) => {
         <span>{Math.round(percentage)}%</span>
         <ProgressBar now={percentage} />
       </div>
-      <div className="bg-gray py-1 text-center rounded-2 my-2 d-flex justify-content-between align-items-center">
-        <div className="d-flex align-items-center ms-4">
+      <div className="bg-gray p-1 text-center text-dark rounded-2 my-2 d-flex justify-content-between align-items-center">
+        <div className="d-flex align-items-center">
           <FaCoins className="mx-2" />
           <div>
             <div>collected</div>
             <div>{currentSum || 0}</div>
           </div>
         </div>
-        <div className="d-flex align-items-center me-4">
+        <div className="d-flex align-items-center">
           <FaBullseye className="mx-2" />
           <div>
             <div>goal</div>

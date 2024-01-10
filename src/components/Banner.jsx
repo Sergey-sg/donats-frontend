@@ -9,7 +9,7 @@ function Banner() {
   const banner = useAppSelector((state) => state.banner)
 
   return (
-    <Carousel data-bs-theme="dark">
+    <Carousel data-bs-theme="light">
       {banner?.map((jar) => (
         <Carousel.Item interval={50000} key={jar.id}>
           <div className="position-relative d-flex justify-content-center align-items-center">
@@ -17,10 +17,10 @@ function Banner() {
               src={jar.title_img}
               alt={jar.img_alt}
               fluid
-              className="object-fit-cover w-auto blurred-image"
-              style={{ maxHeight: "40vh" }}
+              className="object-fit-cover w-100 h-100 blurred-image"
+              style={{ maxHeight: "50vh" }}
             />
-            <Carousel.Caption className="text-dark position-absolute top-0 start-0 mt-3 ms-5">
+            <Carousel.Caption className="position-absolute top-0 start-0 mt-3 ms-5">
               <div className="d-flex flex-wrap ms-5 ps-4">
                 {jar.tags?.map((tag) => (
                   <div key={tag.id} className="me-2">
@@ -30,9 +30,9 @@ function Banner() {
                   </div>
                 ))}
               </div>
-              <Nav.Link href={`/jar-detail/${jar.id}`} className="w-50">
-                <div className="text-start fs-5 ms-5 ps-4">{jar.title}</div>
-                <div className="text-start fs-6 ms-5 ps-4">
+              <Nav.Link href={`/jar-detail/${jar.id}`} className="w-50 text-start ms-5 mt-2 ps-4 text-light rounded bg-transparent-black">
+                <div className="fs-5">{jar.title}</div>
+                <div className="fs-6">
                   {jar.description.slice(0, 100)}
                   {jar.description.length < 100 ? "" : "..."}
                 </div>

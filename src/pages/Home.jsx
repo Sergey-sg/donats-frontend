@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useAppDispatch } from "../redux/hooks";
-import Container from "react-bootstrap/Container";
 import Banner from "../components/Banner";
 import Statistic from "../components/Statistic";
 import Jars from "../components/Jars";
@@ -17,13 +16,13 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <Container className="bg-super-light-blue pb-4">
-      <br />
+    <div className="pb-4">
       <Banner />
       <br />
       <Statistic />
+      <br />
       <Jars />
-    </Container>
+    </div>
   );
 };
 
