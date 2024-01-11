@@ -7,18 +7,19 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import JarDetail from "./pages/JarDetail";
+import { Container } from "react-bootstrap";
 
 
 function App() {
   return (
-    <div className="min-vh-100 vstack bg-super-light-blue mx-5">
+    <Container className="min-vh-100 vstack bg-super-light-blue mx-auto p-0">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={"jar-detail/:jarId"} element={<JarDetail />} />
       </Routes>
       <Footer />
-    </div>
+    </Container>
   );
 }
 
