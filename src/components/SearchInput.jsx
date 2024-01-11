@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import { MdOutlineCancel } from "react-icons/md";
-// import { RiSearchLine } from "react-icons/ri";
 import Form from "react-bootstrap/Form";
 
 const SearchInput = ({ setFiltersParams, searchParam }) => {

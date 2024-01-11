@@ -6,9 +6,9 @@ const TagsList = ({ setFiltersParams }) => {
   const tags = useAppSelector((state) => state.tags);
 
   return (
-    <Row className="justify-content-start">
+    <Row className="justify-content-start ms-0 w-75">
       <ButtonOnHover
-        className="w-auto me-1"
+        className="w-auto me-2 mb-2"
         defaultBg={"bg-teal-400"}
         hoverBg={"bg-teal-600"}
         size="sm"
@@ -22,7 +22,7 @@ const TagsList = ({ setFiltersParams }) => {
           defaultBg={"bg-teal-400"}
           hoverBg={"bg-teal-600"}
           size="sm"
-          className="w-auto mx-1"
+          className="w-auto me-2 mb-2"
           onClick={(e) => setFiltersParams({ tags: tag.name })}
         >
           {tag.name}

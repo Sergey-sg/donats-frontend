@@ -1,15 +1,15 @@
 // change the theme
 $theme-colors: (
-  "super-light-blue": #ECF7FF,
-  "light-blue": #ADDCFF,
-  "orange": #F58F4C,
-  "gray": #F7F7F7,
-  "white": #FFFFFF,
-  "teal-300": #79DFC1,
-  "teal-400": #4DD4AC,
+  "super-light-blue": #ecf7ff,
+  "light-blue": #addcff,
+  "orange": #f58f4c,
+  "gray": #f7f7f7,
+  "white": #ffffff,
+  "teal-300": #79dfc1,
+  "teal-400": #4dd4ac,
   "teal-500": #20c997,
   "teal-600": #1aa179,
-  "blue": #0DCAF0,
+  "blue": #0dcaf0,
 );
 
 .card-custom-height {
@@ -22,12 +22,17 @@ $theme-colors: (
 }
 
 // Import Bootstrap and its default variables
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
-.carousel-control-prev, .carousel-control-next {
+.carousel-control-prev,
+.carousel-control-next {
   width: 10%;
 }
 
 .bg-transparent-black {
   background-color: rgba(32, 31, 31, 0.205);
+}
+
+.dropdown-item:active {
+  background-color: #1aa179;
 }
