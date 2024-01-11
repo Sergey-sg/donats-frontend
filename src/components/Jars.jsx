@@ -7,6 +7,7 @@ import queryString from "query-string";
 import jarWithCoins from "../assets/images/jar-with-coins.png";
 import StatusJar from "./StatusJar";
 import SearchInput from "./SearchInput";
+import TagsList from "./TagsList";
 
 const Jars = () => {
   const dispatch = useAppDispatch();
@@ -30,11 +31,13 @@ const Jars = () => {
   }, [filtersParams, setSearchParams, setFiltersParams]);
 
   return (
-    <>
+    <div className="mx-5">
+      <div className="fs-2 my-3">Actives collections of donations:</div>
       <SearchInput setFiltersParams={setNewFilterParams} searchParam={filtersParams.search} />
+      <TagsList setFiltersParams={setNewFilterParams} />
       <Row className="justify-content-center mb-6">
         {jars?.map((jar) => (
-          <Card key={jar.id} style={{ width: "25rem" }} className="mx-1 my-2">
+          <Card key={jar.id} style={{ width: "25rem" }} className="m-2">
             <Card.Body className="vstack gap-3">
               <Card.Title className="fs-6 fw-bolt">{jar.volunteer}</Card.Title>
               <img
@@ -66,7 +69,7 @@ const Jars = () => {
           </Card>
         ))}
       </Row>
-    </>
+    </div>
   );
 };
 

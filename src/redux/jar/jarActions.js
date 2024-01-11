@@ -2,19 +2,22 @@ import { initialJar } from "./jar.slice";
 import { api } from "../../axios/axios";
 import { initialJars } from "./jars.slice";
 import { initialBanner } from "./banner.slice";
-import queryString from 'query-string'
+import queryString from "query-string";
+import { initialTags } from "./tags.slice";
 
-const getJarById = (jarId) => (api.get(`jars/${jarId}/`));
+const getJarById = (jarId) => api.get(`jars/${jarId}/`);
 
 const getAllJars = (filtersParams) => {
-  const parsed = queryString.parse(window.location.search)
+  const parsed = queryString.parse(window.location.search);
 
-  parsed.page = filtersParams.page || ""
+  // parsed.page = filtersParams.page || "";
 
-  return api.get(`/jars?${queryString.stringify(parsed)}`)
-}
+  return api.get(`/jars?${queryString.stringify(filtersParams)}`);
+};
 
-const getJarsForBanner = () => (api.get("jars/banner/"));
+const getJarsForBanner = () => api.get("jars/banner/");
+
+const getAllTags = () => api.get("jars/tags/");
 
 export const fetchGetJarById = (jarId) => {
   return async (dispatch) => {
@@ -54,7 +57,6 @@ export const fetchGetAllJars = (filtersParams) => {
   };
 };
 
-
 export const fetchGetJarsForBanner = () => {
   return async (dispatch) => {
     try {
@@ -73,3 +75,22 @@ export const fetchGetJarsForBanner = () => {
     }
   };
 };
+
+export const fetchGetAllTags = () => {
+  return async(dispatch) => {
+    try {
+      const response = await getAllTags();
+
+      dispatch(initialTags(response?.data));
+    } catch (e) {
+      const status = e.response?.status;
+      const notFoundMessage = "Tags does not found";
+      const message =
+        e.response?.data.message === notFoundMessage
+          ? notFoundMessage
+          : e.message;
+
+      dispatch({ type: "GET_JAR_FAILURE", payload: { status, message } });
+    }
+  }
+}

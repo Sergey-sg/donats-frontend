@@ -11,7 +11,7 @@ const SearchInput = ({ setFiltersParams, searchParam }) => {
   };
 
   return (
-    <Form onSubmit={(e) => searchJars(e)} className="mx-5">
+    <Form onSubmit={(e) => searchJars(e)} className="mb-3">
       <Form.Control
         type="text"
         id="search"

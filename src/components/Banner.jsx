@@ -49,9 +49,9 @@ function Banner() {
               <div className="w-25 ms-5 ps-4">
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
                 <ButtonOnHover
-                  defaultBg={"btn-outline-secondary"} 
-                  hoverBg={"bg-light"}
-                  className="text-black border-secondary rounded-pill mt-2 w-100 justify-content-start"
+                  defaultBg={"bg-light"} 
+                  hoverBg={"btn-outline-orange"}
+                  className="text-black rounded-pill mt-2 w-100 justify-content-start"
                 >
                   <Nav.Link href="#donate">donate to a good cause</Nav.Link>
                 </ButtonOnHover>
