@@ -15,14 +15,14 @@ const StatusJar = ({ currentSum, goal }) => {
           <FaCoins className="mx-2" />
           <div>
             <div>collected</div>
-            <div>{currentSum || 0}</div>
+            <div>{Math.round(currentSum / 100) || 0}</div>
           </div>
         </div>
         <div className="d-flex align-items-center">
           <FaBullseye className="mx-2" />
           <div>
             <div>goal</div>
-            <div>{goal || 0}</div>
+            <div>{goal / 100 || 0}</div>
           </div>
         </div>
       </div>

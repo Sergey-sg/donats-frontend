@@ -7,6 +7,10 @@ const StatisticTableOfJar = ({ jarId }) => {
   const dispatch = useAppDispatch();
   const statistic = useAppSelector((state) => state.jarStatistic);
 
+  const getOnlyDate = (date) => {
+    return new Date(date).toISOString().split('T')[0]
+  }
+
   useEffect(() => {
     console.log("start useEffect in JarStatistic");
 
@@ -27,9 +31,9 @@ const StatisticTableOfJar = ({ jarId }) => {
         {statistic?.map((amount, index) => (
           <tr key={amount.id}>
             <td>{ index + 1}</td>
-            <td>{amount.sum / 100}</td>
-            <td>{amount.incomes / 100}</td>
-            <td>{amount.date_added}</td>
+            <td>{Math.round(amount.sum / 100)}</td>
+            <td>{Math.round(amount.incomes / 100)}</td>
+            <td>{getOnlyDate(amount.date_added)}</td>
           </tr>
         ))}
       </tbody>

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { fetchGetAllJars } from "../redux/jar/jarActions";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Card, Button, Nav, Row, Col } from "react-bootstrap";
+import { Card, Button, Nav, Row } from "react-bootstrap";
 import queryString from "query-string";
 import jarWithCoins from "../assets/images/jar-with-coins.png";
 import StatusJar from "./StatusJar";
