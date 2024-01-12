@@ -4,20 +4,19 @@ import { initialJars } from "./jars.slice";
 import { initialBanner } from "./banner.slice";
 import queryString from "query-string";
 import { initialTags } from "./tags.slice";
+import { initialJarStatistic } from "./jarStatistic.slice";
 
 const getJarById = (jarId) => api.get(`jars/${jarId}/`);
 
 const getAllJars = (filtersParams) => {
-  const parsed = queryString.parse(window.location.search);
-
-  // parsed.page = filtersParams.page || "";
-
   return api.get(`/jars?${queryString.stringify(filtersParams)}`);
 };
 
 const getJarsForBanner = () => api.get("jars/banner/");
 
 const getAllTags = () => api.get("jars/tags/");
+
+const getJarStatistic = (jarId) => api.get(`jars/${jarId}/statistic/`);
 
 export const fetchGetJarById = (jarId) => {
   return async (dispatch) => {
@@ -77,7 +76,7 @@ export const fetchGetJarsForBanner = () => {
 };
 
 export const fetchGetAllTags = () => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     try {
       const response = await getAllTags();
 
@@ -92,5 +91,24 @@ export const fetchGetAllTags = () => {
 
       dispatch({ type: "GET_JAR_FAILURE", payload: { status, message } });
     }
-  }
-}
+  };
+};
+
+export const fetchGetJarStatistic = (jarId) => {
+  return async (dispatch) => {
+    try {
+      const response = await getJarStatistic(jarId);
+
+      dispatch(initialJarStatistic(response?.data));
+    } catch (e) {
+      const status = e.response?.status;
+      const notFoundMessage = "Jar does not found for user";
+      const message =
+        e.response?.data.message === notFoundMessage
+          ? notFoundMessage
+          : e.message;
+
+      dispatch({ type: "GET_JAR_FAILURE", payload: { status, message } });
+    }
+  };
+};

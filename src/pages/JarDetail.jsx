@@ -5,6 +5,7 @@ import ImageList from "../components/ImageList";
 import { Row, Button, Nav, Image } from "react-bootstrap";
 import { fetchGetJarById } from "../redux/jar/jarActions";
 import StatusJar from "../components/StatusJar";
+import StatisticTableOfJar from "../components/StatisticTableOfJar";
 
 const JarDetail = () => {
   const { jarId } = useParams();
@@ -54,6 +55,7 @@ const JarDetail = () => {
           </Button>
         </div>
       </Row>
+      <StatisticTableOfJar jarId={jar.id} />
     </>
   );
 };
