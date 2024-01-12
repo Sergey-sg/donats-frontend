@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import { fetchGetAllJars } from "../redux/jar/jarActions";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Card, Button, Nav, Row } from "react-bootstrap";
+import { Card, Nav, Row } from "react-bootstrap";
 import queryString from "query-string";
 import jarWithCoins from "../assets/images/jar-with-coins.png";
 import StatusJar from "./StatusJar";
 import SearchInput from "./SearchInput";
 import TagsList from "./TagsList";
 import OrderingDropDownMenu from "./OrderingDropDownMenu";
+import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
 
 const Jars = () => {
   const dispatch = useAppDispatch();
@@ -25,19 +26,28 @@ const Jars = () => {
     dispatch(fetchGetAllJars(filtersParams));
   }, [dispatch, filtersParams]);
 
-  const setNewFilterParams = useCallback((param) => {
-    const newParams = { ...filtersParams, ...param };
-    setSearchParams(queryString.stringify(newParams));
-    setFiltersParams(newParams);
-  }, [filtersParams, setSearchParams, setFiltersParams]);
+  const setNewFilterParams = useCallback(
+    (param) => {
+      const newParams = { ...filtersParams, ...param };
+      setSearchParams(queryString.stringify(newParams));
+      setFiltersParams(newParams);
+    },
+    [filtersParams, setSearchParams, setFiltersParams]
+  );
 
   return (
     <div className="mx-5">
       <div className="fs-2 my-3">Actives collections of donations:</div>
       <Row className="justify-content-between mb-2 w-100 mx-auto">
-        <SearchInput setFiltersParams={setNewFilterParams} searchParam={filtersParams.search} />
-          <TagsList setFiltersParams={setNewFilterParams} />
-          <OrderingDropDownMenu setFiltersParams={setNewFilterParams} orderingParam={filtersParams.ordering} />
+        <SearchInput
+          setFiltersParams={setNewFilterParams}
+          searchParam={filtersParams.search}
+        />
+        <TagsList setFiltersParams={setNewFilterParams} />
+        <OrderingDropDownMenu
+          setFiltersParams={setNewFilterParams}
+          orderingParam={filtersParams.ordering}
+        />
       </Row>
       <Row className="justify-content-center mb-6">
         {jars?.map((jar) => (
@@ -65,9 +75,7 @@ const Jars = () => {
                     {jar.description.length < 100 ? "" : "..."}
                   </Card.Text>
                 </Nav.Link>
-                <Button className="bg-orange w-100 rounded-pill mt-2">
-                  <Nav.Link href="#donate">donate to a good cause</Nav.Link>
-                </Button>
+                <ButtonDonateOnNewTab monobankId={jar.monobank_id} className="bg-orange w-100 rounded-pill mt-2" />
               </div>
             </Card.Body>
           </Card>

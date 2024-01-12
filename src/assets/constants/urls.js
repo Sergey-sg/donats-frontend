@@ -1,0 +1,1 @@
+export const monobankJarUrl = "https://send.monobank.ua/jar/"

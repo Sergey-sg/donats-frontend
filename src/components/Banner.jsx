@@ -2,19 +2,18 @@ import { useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { Carousel, Image, Nav } from "react-bootstrap";
 import StatusJar from "./StatusJar";
-import ButtonOnHover from "./ButtonOnHover";
 import { useAppDispatch } from "../redux/hooks";
 import { fetchGetJarsForBanner } from "../redux/jar/jarActions";
-
-
+import { monobankJarUrl } from "../assets/constants/urls";
+import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
 
 function Banner() {
   const dispatch = useAppDispatch();
-  const banner = useAppSelector((state) => state.banner)
+  const banner = useAppSelector((state) => state.banner);
 
   useEffect(() => {
     console.log("start useEffect banner in Home");
-    dispatch(fetchGetJarsForBanner())
+    dispatch(fetchGetJarsForBanner());
   }, [dispatch]);
 
   return (
@@ -39,7 +38,10 @@ function Banner() {
                   </div>
                 ))}
               </div>
-              <Nav.Link href={`/jar-detail/${jar.id}`} className="w-50 text-start ms-5 mt-2 ps-4 text-light rounded bg-transparent-black">
+              <Nav.Link
+                href={`/jar-detail/${jar.id}`}
+                className="w-50 text-start ms-5 mt-2 ps-4 text-light rounded bg-transparent-black"
+              >
                 <div className="fs-5">{jar.title}</div>
                 <div className="fs-6">
                   {jar.description.slice(0, 100)}
@@ -48,13 +50,12 @@ function Banner() {
               </Nav.Link>
               <div className="w-25 ms-5 ps-4">
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
-                <ButtonOnHover
-                  defaultBg={"bg-light"} 
+                <ButtonDonateOnNewTab
+                  monobankId={jar.monobank_id} 
+                  defaultBg={"bg-light"}
                   hoverBg={"btn-outline-orange"}
                   className="text-black rounded-pill mt-2 w-100 justify-content-start"
-                >
-                  <Nav.Link href="#donate">donate to a good cause</Nav.Link>
-                </ButtonOnHover>
+                />
               </div>
             </Carousel.Caption>
           </div>

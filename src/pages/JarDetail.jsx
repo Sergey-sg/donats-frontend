@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useParams } from "react-router-dom";
 import ImageList from "../components/ImageList";
-import { Row, Button, Nav, Image } from "react-bootstrap";
+import { Row, Image } from "react-bootstrap";
 import { fetchGetJarById } from "../redux/jar/jarActions";
 import StatusJar from "../components/StatusJar";
 import StatisticTableOfJar from "../components/StatisticTableOfJar";
+import ButtonDonateOnNewTab from "../components/ButtonDonateOnNewTab";
 
 const JarDetail = () => {
   const { jarId } = useParams();
@@ -38,7 +39,9 @@ const JarDetail = () => {
           ))}
         </div>
         <div className="position-absolute">
-          <div className="fs-4 ms-5 mt-5 px-4 text-light rounded bg-transparent-black">{jar.title}</div>
+          <div className="fs-4 ms-5 mt-5 px-4 text-light rounded bg-transparent-black">
+            {jar.title}
+          </div>
         </div>
       </div>
       <Row className="p-4 mb-auto">
@@ -50,9 +53,7 @@ const JarDetail = () => {
         </div>
         <div className="w-25 pe-5 pt-5">
           <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
-          <Button className="bg-orange w-100 rounded-pill mt-2">
-            <Nav.Link href="#donate">donate to a good cause</Nav.Link>
-          </Button>
+          <ButtonDonateOnNewTab monobankId={jar.monobank_id}  className="bg-orange w-100 rounded-pill mt-2" />
         </div>
       </Row>
       <StatisticTableOfJar jarId={jar.id} />
