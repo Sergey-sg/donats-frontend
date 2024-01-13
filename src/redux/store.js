@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import jarReducer from "./jar/jar.slice";
-import jarsReducer from "./jar/jars.slice";
-import bannerReducer from "./jar/banner.slice";
-import tagsReducer from "./jar/tags.slice"
-import jarStatisticReducer from "./jar/jarStatistic.slice"
+import jarReducer from "./jar/slices/jar.slice";
+import jarsReducer from "./jar/slices/jars.slice";
+import bannerReducer from "./jar/slices/banner.slice";
+import tagsReducer from "./jar/slices/tags.slice"
+import jarStatisticReducer from "./jar/slices/jarStatistic.slice"
 
 const store = configureStore({
   reducer: {

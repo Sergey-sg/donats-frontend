@@ -4,7 +4,6 @@ import { Carousel, Image, Nav } from "react-bootstrap";
 import StatusJar from "./StatusJar";
 import { useAppDispatch } from "../redux/hooks";
 import { fetchGetJarsForBanner } from "../redux/jar/jarActions";
-import { monobankJarUrl } from "../assets/constants/urls";
 import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
 
 function Banner() {
@@ -51,7 +50,7 @@ function Banner() {
               <div className="w-25 ms-5 ps-4">
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
                 <ButtonDonateOnNewTab
-                  monobankId={jar.monobank_id} 
+                  monobankId={jar.monobank_id}
                   defaultBg={"bg-light"}
                   hoverBg={"btn-outline-orange"}
                   className="text-black rounded-pill mt-2 w-100 justify-content-start"

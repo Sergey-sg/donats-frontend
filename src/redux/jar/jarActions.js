@@ -1,10 +1,10 @@
-import { initialJar } from "./jar.slice";
 import { api } from "../../axios/axios";
-import { initialJars } from "./jars.slice";
-import { initialBanner } from "./banner.slice";
 import queryString from "query-string";
-import { initialTags } from "./tags.slice";
-import { initialJarStatistic } from "./jarStatistic.slice";
+import { initialJar } from "./slices/jar.slice";
+import { initialJars } from "./slices/jars.slice";
+import { initialBanner } from "./slices/banner.slice";
+import { initialTags } from "./slices/tags.slice";
+import { initialJarStatistic } from "./slices/jarStatistic.slice";
 
 const getJarById = (jarId) => api.get(`jars/${jarId}/`);
 
