@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
-import { Carousel, Image, Nav } from "react-bootstrap";
+import { Carousel, Image } from "react-bootstrap";
 import StatusJar from "./StatusJar";
 import { useAppDispatch } from "../redux/hooks";
 import { fetchGetJarsForBanner } from "../redux/jar/jarActions";
 import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
+import { Link } from "react-router-dom";
 
 function Banner() {
   const dispatch = useAppDispatch();
@@ -37,16 +38,18 @@ function Banner() {
                   </div>
                 ))}
               </div>
-              <Nav.Link
-                href={`/jar-detail/${jar.id}`}
-                className="w-50 text-start ms-5 mt-2 ps-4 text-light rounded bg-transparent-black"
+              <Link
+                to={`/jar-detail/${jar.id}`}
+                className="link-offset-2 link-underline link-underline-opacity-0"
               >
-                <div className="fs-5">{jar.title}</div>
-                <div className="fs-6">
-                  {jar.description.slice(0, 100)}
-                  {jar.description.length < 100 ? "" : "..."}
+                <div className="w-50 text-start ms-5 mt-2 ps-4 text-light rounded bg-transparent-black">
+                  <div className="fs-5">{jar.title}</div>
+                  <div className="fs-6">
+                    {jar.description.slice(0, 100)}
+                    {jar.description.length < 100 ? "" : "..."}
+                  </div>
                 </div>
-              </Nav.Link>
+              </Link>
               <div className="w-25 ms-5 ps-4">
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
                 <ButtonDonateOnNewTab

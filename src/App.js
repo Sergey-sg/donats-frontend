@@ -8,6 +8,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import JarDetail from "./pages/JarDetail";
 import { Container } from "react-bootstrap";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path={"jar-detail/:jarId"} element={<JarDetail />} />
+        <Route path={"/jar-detail/:jarId"} element={<JarDetail />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
       </Routes>
       <Footer />
     </Container>

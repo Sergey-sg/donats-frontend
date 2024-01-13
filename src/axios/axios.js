@@ -25,12 +25,9 @@ api.interceptors.response.use(
       const originalRequest = { ...error.config, _isRetry: true };
 
       try {
-        const response = await api.post(
-          "auth/refresh/",
-          {
-            refresh: localStorage.getItem("refresh"),
-          }
-        );
+        const response = await api.post("auth/refresh/", {
+          refresh: localStorage.getItem("refresh"),
+        });
 
         localStorage.setItem("access", response.data.access);
         localStorage.setItem("refresh", response.data.refresh);
