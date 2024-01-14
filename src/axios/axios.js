@@ -6,7 +6,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem("access");
+  const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -26,11 +26,11 @@ api.interceptors.response.use(
 
       try {
         const response = await api.post("auth/refresh/", {
-          refresh: localStorage.getItem("refresh"),
+          refresh: localStorage.getItem("refreshToken"),
         });
 
-        localStorage.setItem("access", response.data.access);
-        localStorage.setItem("refresh", response.data.refresh);
+        localStorage.setItem("accessToken", response.data.access);
+        localStorage.setItem("refreshToken", response.data.refresh);
 
         return await api.request({
           method: originalRequest.method,
@@ -39,7 +39,7 @@ api.interceptors.response.use(
       } catch (e) {
         console.log("Unauthorized");
         if (originalRequest._isRetry) {
-          localStorage.setItem("access", "");
+          localStorage.setItem("accessToken", "");
         }
       }
     }

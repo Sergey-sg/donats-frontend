@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { useAppSelector } from "../redux/hooks";
 import { Carousel, Image } from "react-bootstrap";
 import StatusJar from "./StatusJar";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGetJarsForBanner } from "../redux/jar/jarActions";
 import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
 import { Link } from "react-router-dom";
@@ -40,7 +39,7 @@ function Banner() {
               </div>
               <Link
                 to={`/jar-detail/${jar.id}`}
-                className="link-offset-2 link-underline link-underline-opacity-0"
+                className="link-underline link-underline-opacity-0"
               >
                 <div className="w-50 text-start ms-5 mt-2 ps-4 text-light rounded bg-transparent-black">
                   <div className="fs-5">{jar.title}</div>
@@ -54,9 +53,9 @@ function Banner() {
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
                 <ButtonDonateOnNewTab
                   monobankId={jar.monobank_id}
-                  defaultBg={"bg-light"}
-                  hoverBg={"btn-outline-orange"}
-                  className="text-black rounded-pill mt-2 w-100 justify-content-start"
+                  defaultBg={"bg-orange"}
+                  hoverBg={"bg-orange-dark"}
+                  className="rounded-pill mt-2 w-100 justify-content-start"
                 />
               </div>
             </Carousel.Caption>

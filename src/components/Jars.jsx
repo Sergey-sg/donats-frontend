@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { fetchGetAllJars } from "../redux/jar/jarActions";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Card, Nav, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import queryString from "query-string";
 import jarWithCoins from "../assets/images/jar-with-coins.png";
 import StatusJar from "./StatusJar";
@@ -59,23 +60,31 @@ const Jars = () => {
                 className="w-25 mx-auto"
                 alt="Jar with coins"
               />
-              <Nav.Link href={`/jar-detail/${jar.id}`}>
+              <Link
+                to={`/jar-detail/${jar.id}`}
+                className="link-underline link-underline-opacity-0 text-black"
+              >
                 <Card.Text className="text-center fs-4 mb-0 card-custom-height">
                   {jar.title}
                 </Card.Text>
-              </Nav.Link>
+              </Link>
               <div className="vstack gap-2">
                 <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
-                <Nav.Link
-                  href={`/jar-detail/${jar.id}`}
-                  className="fs-6 mb-auto"
+                <Link
+                  to={`/jar-detail/${jar.id}`}
+                  className="fs-6 mb-auto link-underline link-underline-opacity-0 text-black"
                 >
                   <Card.Text>
                     {jar.description.slice(0, 100)}
                     {jar.description.length < 100 ? "" : "..."}
                   </Card.Text>
-                </Nav.Link>
-                <ButtonDonateOnNewTab monobankId={jar.monobank_id} className="bg-orange w-100 rounded-pill mt-2" />
+                </Link>
+                <ButtonDonateOnNewTab
+                  monobankId={jar.monobank_id}
+                  className="w-100 rounded-pill mt-2"
+                  defaultBg={"bg-orange"}
+                  hoverBg={"bg-orange-dark"}
+                />
               </div>
             </Card.Body>
           </Card>

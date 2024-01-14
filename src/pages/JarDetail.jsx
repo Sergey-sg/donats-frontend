@@ -7,6 +7,7 @@ import { fetchGetJarById } from "../redux/jar/jarActions";
 import StatusJar from "../components/StatusJar";
 import StatisticTableOfJar from "../components/StatisticTableOfJar";
 import ButtonDonateOnNewTab from "../components/ButtonDonateOnNewTab";
+import ScrollToTopOnPage from "../components/ScrollToTopOnPage";
 
 const JarDetail = () => {
   const { jarId } = useParams();
@@ -21,6 +22,7 @@ const JarDetail = () => {
 
   return (
     <>
+      <ScrollToTopOnPage />
       <div className="position-relative d-flex justify-content-center align-items-center">
         <Image
           src={jar.title_img}
@@ -53,7 +55,12 @@ const JarDetail = () => {
         </div>
         <div className="w-25 pe-5 pt-5">
           <StatusJar currentSum={jar.current_sum} goal={jar.goal} />
-          <ButtonDonateOnNewTab monobankId={jar.monobank_id}  className="bg-orange w-100 rounded-pill mt-2" />
+          <ButtonDonateOnNewTab
+            monobankId={jar.monobank_id}
+            className="w-100 rounded-pill mt-2"
+            defaultBg={"bg-orange"}
+            hoverBg={"bg-orange-dark"}
+          />
         </div>
       </Row>
       <StatisticTableOfJar jarId={jar.id} />

@@ -3,10 +3,13 @@ import * as Yup from "yup";
 import * as formik from "formik";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { useAppDispatch } from "../../redux/hooks";
+import { fetchLogin } from "../../redux/authActions";
 
 const LoginForm = () => {
   const { Formik } = formik;
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -19,9 +22,9 @@ const LoginForm = () => {
 
   const handleSubmit = useCallback(({ email, password }) => {
     const params = { email, password };
-    console.log(params);
-    // dispatch(fetchLogin(params));
-  }, []);
+    dispatch(fetchLogin(params));
+  }, [dispatch]);
+
 
   return (
       <Formik
