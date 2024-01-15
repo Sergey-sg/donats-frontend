@@ -1,16 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import * as Yup from "yup";
 import * as formik from "formik";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { fetchLogin } from "../../redux/authActions";
 
 const LoginForm = () => {
   const { Formik } = formik;
   const [showPassword, setShowPassword] = useState(false);
-  const user = useAppSelector((state) => state.user);
   const navigate = useNavigate()
   const dispatch = useAppDispatch();
 
@@ -26,13 +25,8 @@ const LoginForm = () => {
   const handleSubmit = useCallback(({ email, password }) => {
     const params = { email, password };
     dispatch(fetchLogin(params));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (user.id) {
-      navigate("/")
-    }
-  }, [navigate, user])
+    navigate("/")
+  }, [dispatch, navigate]);
 
 
   return (

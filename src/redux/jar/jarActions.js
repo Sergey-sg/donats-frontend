@@ -18,6 +18,8 @@ const getAllTags = () => api.get("jars/tags/");
 
 const getJarStatistic = (jarId) => api.get(`jars/${jarId}/statistic/`);
 
+const createNewJar = (data) => api.post("jars/", data);
+
 export const fetchGetJarById = (jarId) => {
   return async (dispatch) => {
     try {
@@ -101,6 +103,26 @@ export const fetchGetJarStatistic = (jarId) => {
 
       dispatch(initialJarStatistic(response?.data));
     } catch (e) {
+      const status = e.response?.status;
+      const notFoundMessage = "Jar does not found for user";
+      const message =
+        e.response?.data.message === notFoundMessage
+          ? notFoundMessage
+          : e.message;
+
+      dispatch({ type: "GET_JAR_FAILURE", payload: { status, message } });
+    }
+  };
+};
+
+export const fetchCreateNewJar = (data) => {
+  return async (dispatch) => {
+    try {
+      const response = await createNewJar(data);
+      
+      dispatch(initialJar(response?.data));
+    } catch (e) {
+      console.log(e)
       const status = e.response?.status;
       const notFoundMessage = "Jar does not found for user";
       const message =

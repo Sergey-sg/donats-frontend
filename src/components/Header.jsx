@@ -42,7 +42,7 @@ function Header() {
           >
             Contacts
           </Nav.Link>
-          {user.id ? (
+          {user ? (
             <DropDownUserMenu />
           ) : (
             <Nav.Link

@@ -39,6 +39,7 @@ export const fetchLogout = () => {
 
       dispatch(removeUser());
     } catch (e) {
+      console.log(e)
       const status = e.response?.status;
       const notFoundMessage = "Jar does not found for user";
       const message =

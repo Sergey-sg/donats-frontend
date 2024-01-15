@@ -10,6 +10,7 @@ import JarDetail from "./pages/JarDetail";
 import { Container } from "react-bootstrap";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import CreateJar from "./pages/CreateJar";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path={"/jar-detail/:jarId"} element={<JarDetail />} />
+        <Route path={"/new-jar"} element={<CreateJar />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
       </Routes>

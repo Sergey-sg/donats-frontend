@@ -16,31 +16,20 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (resp) => resp,
   async (error) => {
-    if (
-      // eslint-disable-next-line
-      error.response.status == 401 &&
-      error.config &&
-      !error.config._isRetry
-    ) {
-      const originalRequest = { ...error.config, _isRetry: true };
+    const refresh = localStorage.getItem("refreshToken");
+    if ( error.response.status === 401 && error.config && refresh ) {
 
       try {
-        const response = await api.post("auth/refresh/", {
-          refresh: localStorage.getItem("refreshToken"),
-        });
+        const response = await api.post("auth/refresh/", refresh);
 
         localStorage.setItem("accessToken", response.data.access);
         localStorage.setItem("refreshToken", response.data.refresh);
 
-        return await api.request({
-          method: originalRequest.method,
-          url: originalRequest.url,
-        });
+        return api.request(error.config);
       } catch (e) {
         console.log("Unauthorized");
-        if (originalRequest._isRetry) {
-          localStorage.setItem("accessToken", "");
-        }
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
       }
     }
     throw error;

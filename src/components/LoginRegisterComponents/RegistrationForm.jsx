@@ -19,12 +19,13 @@ const RegistrationForm = () => {
       .oneOf([Yup.ref("password1"), null], "Passwords must match"),
   });
 
-  const handleSubmit = (e) => e.preventDefault();
-  useCallback(({ email, password1, password2 }) => {
-    const params = { email, password1, password2 };
-    console.log(params);
-    // dispatch(fetchRegistration(params));
-  }, []);
+  const handleSubmit = (e) => 
+    e.preventDefault();
+    useCallback(({ email, password1, password2 }) => {
+      const params = { email, password1, password2 };
+      console.log(params);
+      // dispatch(fetchRegistration(params));
+    }, []);
 
   return (
     <Formik

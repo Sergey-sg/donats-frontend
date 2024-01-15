@@ -37,6 +37,11 @@ const DropDownUserMenu = () => {
             Personal Area
           </Nav.Link>
         </NavDropdown.Item>
+        <NavDropdown.Item as="li">
+          <Nav.Link as={Link} to="/new-jar" className="text-black">
+            Create new Jar
+          </Nav.Link>
+        </NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item as="li">
           <div className="text-black btn" onClick={() => logout()}>
