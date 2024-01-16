@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useAppDispatch } from "../redux/hooks";
-import Banner from "../components/Banner";
+import Banner from "../components/jarComponents/Banner";
 import Statistic from "../components/Statistic";
-import Jars from "../components/Jars";
+import Jars from "../components/jarComponents/Jars";
 import { fetchGetAllTags } from "../redux/jar/jarActions";
 
 const Home = () => {

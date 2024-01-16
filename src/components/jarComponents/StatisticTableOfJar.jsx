@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Table from "react-bootstrap/Table";
-import { fetchGetJarStatistic } from "../redux/jar/jarActions";
+import { fetchGetJarStatistic } from "../../redux/jar/jarActions";
 
 const StatisticTableOfJar = ({ jarId }) => {
   const dispatch = useAppDispatch();

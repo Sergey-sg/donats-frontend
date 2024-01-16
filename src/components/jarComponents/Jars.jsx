@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { fetchGetAllJars } from "../redux/jar/jarActions";
+import { fetchGetAllJars } from "../../redux/jar/jarActions";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Card, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import queryString from "query-string";
-import jarWithCoins from "../assets/images/jar-with-coins.png";
+import jarWithCoins from "../../assets/images/jar-with-coins.png";
 import StatusJar from "./StatusJar";
 import SearchInput from "./SearchInput";
 import TagsList from "./TagsList";
 import OrderingDropDownMenu from "./OrderingDropDownMenu";
-import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
+import ButtonDonateOnNewTab from "../ButtonDonateOnNewTab";
 
 const Jars = () => {
   const dispatch = useAppDispatch();

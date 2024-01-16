@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ButtonOnHover from "./ButtonOnHover";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchGetAuthorizedUser } from "../redux/user/userActions";
-import DropDownUserMenu from "./LoginRegisterComponents/DropDownUserMenu";
+import DropDownUserMenu from "./loginRegisterComponents/DropDownUserMenu";
 
 function Header() {
   const dispatch = useAppDispatch();

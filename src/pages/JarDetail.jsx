@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useParams } from "react-router-dom";
-import ImageList from "../components/ImageList";
+import ImageList from "../components/jarComponents/ImageList";
 import { Row, Image } from "react-bootstrap";
 import { fetchGetJarById } from "../redux/jar/jarActions";
-import StatusJar from "../components/StatusJar";
-import StatisticTableOfJar from "../components/StatisticTableOfJar";
+import StatusJar from "../components/jarComponents/StatusJar";
+import StatisticTableOfJar from "../components/jarComponents/StatisticTableOfJar";
 import ButtonDonateOnNewTab from "../components/ButtonDonateOnNewTab";
 import ScrollToTopOnPage from "../components/ScrollToTopOnPage";
 

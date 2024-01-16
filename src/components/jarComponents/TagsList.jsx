@@ -1,6 +1,6 @@
 import { Row } from "react-bootstrap";
-import { useAppSelector } from "../redux/hooks";
-import ButtonOnHover from "./ButtonOnHover";
+import { useAppSelector } from "../../redux/hooks";
+import ButtonOnHover from "../ButtonOnHover";
 
 const TagsList = ({ setFiltersParams }) => {
   const tags = useAppSelector((state) => state.tags);

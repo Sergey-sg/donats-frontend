@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import ButtonOnHover from "./ButtonOnHover";
+import ButtonOnHover from "../ButtonOnHover";
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => {
   return (

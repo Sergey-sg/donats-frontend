@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Carousel, Image } from "react-bootstrap";
 import StatusJar from "./StatusJar";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { fetchGetJarsForBanner } from "../redux/jar/jarActions";
-import ButtonDonateOnNewTab from "./ButtonDonateOnNewTab";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchGetJarsForBanner } from "../../redux/jar/jarActions";
+import ButtonDonateOnNewTab from "../ButtonDonateOnNewTab";
 import { Link } from "react-router-dom";
 
 function Banner() {

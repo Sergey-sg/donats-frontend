@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
-import { useAppDispatch } from "../redux/hooks";
+import React, { useState, useCallback, useEffect } from "react";
+// import { useAppDispatch } from "../redux/hooks";
 import { Button, Container, Form } from "react-bootstrap";
-import { fetchCreateNewJar } from "../redux/jar/jarActions";
+// import { fetchCreateNewJar } from "../redux/jar/jarActions";
 import * as Yup from "yup";
 import * as formik from "formik";
 
@@ -21,15 +21,26 @@ const CreateJar = () => {
   const { Formik } = formik;
 
   const [addAlbum, setAddAlbum] = useState(false);
-  const [formData, setFormData] = useState();
-  const dispatch = useAppDispatch();
+  const [formData, setFormData] = useState({
+    monobank_url: "",
+    title: "",
+    description: "",
+    tags: [],
+    title_img: undefined,
+    img_alt: "",
+    album: [],
+  });
+  // const dispatch = useAppDispatch();
 
   const handleAddAlbum = () => {
-    setAddAlbum(!addAlbum);
+    setAddAlbum(true);
+    setFormData({
+      ...formData,
+      album: [...formData.album, { img: undefined, img_alt: "" }],
+    });
   };
 
-  const handleSubmitJar = (e) => e.preventDefault();
-  useCallback(
+  const handleSubmitJar = useCallback(
     ({ monobank_url, title, description, tags, title_img, img_alt }) => {
       const params = {
         monobank_url,
@@ -45,42 +56,43 @@ const CreateJar = () => {
     [formData]
   );
 
-  const handleSubmitAlbum = (e) => e.preventDefault();
-  useCallback(({ img, img_alt }) => {
-    const album = { img, img_alt };
-    console.log(album);
-    setFormData({...formData, album: [...formData.album, ...album]});
-  }, [formData]);
-
-  const handleSendJar = (e) => {
-    e.preventDefault();
-
-    const submitData = new FormData();
-
-    submitData.append("monobank_id", formData.monobank_id);
-    submitData.append("title", formData.title);
-    submitData.append("description", formData.description);
-    submitData.append("tags", formData.tags);
-    submitData.append("title_img", formData.title_img);
-    submitData.append("album", formData.album);
-    submitData.append("img_alt", formData.img_alt);
-
-    dispatch(fetchCreateNewJar(submitData));
+  const handleAlbumChange = (index, field, value) => {
+    const updatedAlbum = [...formData.album];
+    updatedAlbum[index] = { ...updatedAlbum[index], [field]: value };
+    setFormData({ ...formData, album: updatedAlbum });
   };
+
+  const handleRemoveImageFromAlbum = (index) => {
+    const updatedAlbum = [...formData.album];
+    updatedAlbum.splice(index, 1);
+    if (!updatedAlbum) {
+      setAddAlbum(false);
+    }
+    setFormData({ ...formData, album: updatedAlbum });
+  };
+
+  // const handleSendJar = (e) => {
+  //   e.preventDefault();
+
+  //   const submitData = new FormData();
+
+  //   submitData.append("monobank_id", formData.monobank_id);
+  //   submitData.append("title", formData.title);
+  //   submitData.append("description", formData.description);
+  //   submitData.append("tags", formData.tags);
+  //   submitData.append("title_img", formData.title_img);
+  //   submitData.append("album[]", formData.album);
+  //   submitData.append("img_alt", formData.img_alt);
+
+  //   dispatch(fetchCreateNewJar(submitData));
+  // };
 
   return (
     <Container className="mb-auto py-4">
       <Formik
         validationSchema={jarSchema}
         onSubmit={handleSubmitJar}
-        initialValues={{
-          monobank_url: "",
-          title: "",
-          description: "",
-          tags: [],
-          title_img: null,
-          img_alt: "",
-        }}
+        initialValues={formData}
         validateOnChange={false}
         validateOnBlur={true}
       >
@@ -92,7 +104,8 @@ const CreateJar = () => {
           touched,
           errors,
         }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="w-75 mx-auto">
+            <div className="mb-3 fs-3">New Jar:</div>
             <Form.Group>
               <Form.Label>Monobank Jar URL</Form.Label>
               <Form.Control
@@ -138,7 +151,8 @@ const CreateJar = () => {
             <Form.Group>
               <Form.Label>Description</Form.Label>
               <Form.Control
-                type="textarea"
+                as="textarea"
+                rows={4}
                 name="description"
                 id="description"
                 placeholder="Enter jar description"
@@ -217,79 +231,89 @@ const CreateJar = () => {
                 </Form.Control.Feedback>
               )}
             </Form.Group>
-            <Button type="submit">Create Jar</Button>
+            {addAlbum ? (
+              <>
+                <div className="my-3 fs-3">Album for Jar:</div>
+                {formData.album.map((albumImage, index) => (
+                  <div key={index}>
+                    <Form.Group>
+                      <Form.Label>Album Image</Form.Label>
+                      <Form.Control
+                        type="file"
+                        name={`album[${index}].img`}
+                        id="img"
+                        value={albumImage.img}
+                        onChange={(e) =>
+                          handleAlbumChange(index, "img", e.target.value)
+                        }
+                        // isInvalid={
+                        //   touched.albumImage.img && !!errors.albumImage.img
+                        // }
+                        onBlur={handleBlur}
+                      />
+                      {/* <Form.Control.Feedback type="invalid">
+                        {errors.albumImage.img}
+                      </Form.Control.Feedback> */}
+                      <Form.Text color="muted">
+                        Upload the image for album of the jar.
+                      </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Image Alt Text</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name={`album[${index}].img_alt`}
+                        id="img_alt"
+                        placeholder="Enter image alt text"
+                        value={albumImage.img_alt}
+                        onChange={(e) =>
+                          handleAlbumChange(index, "img_alt", e.target.value)
+                        }
+                        // isValid={
+                        //   touched.albumImage.img_alt &&
+                        //   !errors.albumImage.img_alt
+                        // }
+                        // isInvalid={
+                        //   touched.albumImage.img_alt &&
+                        //   !!errors.albumImage.img_alt
+                        // }
+                        onBlur={handleBlur}
+                      />
+                      {/* {touched.albumImage.img_alt &&
+                      !errors.albumImage.img_alt ? (
+                        <Form.Control.Feedback>
+                          Looks good!
+                        </Form.Control.Feedback>
+                      ) : (
+                        <Form.Control.Feedback type="invalid">
+                          {errors.albumImage.img_alt}
+                        </Form.Control.Feedback>
+                      )} */}
+                    </Form.Group>
+                    {/* <Button
+                      variant="danger"
+                      onClick={handleRemoveImageFromAlbum(index)}
+                      className="mt-3 bg-orange"
+                    >
+                      Remove Image
+                    </Button> */}
+                    <Button onClick={handleAddAlbum} className="mt-3 bg-orange">
+                      Add Image
+                    </Button> 
+                  </div>
+                ))}
+              </>
+            ) : (
+              <Button onClick={handleAddAlbum} className="mt-3">
+                Add Album
+              </Button>
+            )}
+            <Button type="submit" className="float-end mt-3">
+              Create Jar
+            </Button>
           </Form>
         )}
       </Formik>
-      {addAlbum ? (
-        <>
-          <div>Album for Jar:</div>
-          <Formik
-            validationSchema={jarSchema}
-            onSubmit={handleSubmitAlbum}
-            initialValues={{
-              img: null,
-              img_alt: "",
-            }}
-            validateOnChange={false}
-            validateOnBlur={true}
-          >
-            {({
-              handleSubmit,
-              handleChange,
-              handleBlur,
-              values,
-              touched,
-              errors,
-            }) => (
-              <Form onSubmit={handleSubmit}>
-                <Form.Group>
-                  <Form.Label>Album Image</Form.Label>
-                  <Form.Control
-                    type="file"
-                    name="img"
-                    id="img"
-                    value={values.img}
-                    onChange={handleChange}
-                    isInvalid={touched.img && !!errors.img}
-                    onBlur={handleBlur}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {errors.img}
-                  </Form.Control.Feedback>
-                  <Form.Text color="muted">
-                    Upload the image for album of the jar.
-                  </Form.Text>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Image Alt Text</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="img_alt"
-                    id="img_alt"
-                    placeholder="Enter image alt text"
-                    value={values.img_alt}
-                    onChange={handleChange}
-                    isValid={touched.img_alt && !errors.img_alt}
-                    isInvalid={touched.img_alt && !!errors.img_alt}
-                    onBlur={handleBlur}
-                  />
-                  {touched.img_alt && !errors.img_alt ? (
-                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                  ) : (
-                    <Form.Control.Feedback type="invalid">
-                      {errors.img_alt}
-                    </Form.Control.Feedback>
-                  )}
-                </Form.Group>
-                <Button type="submit">Add Image to Album</Button>
-              </Form>
-            )}
-          </Formik>
-        </>
-      ) : (
-        <Button onClick={handleAddAlbum}>Add Album</Button>
-      )}
     </Container>
   );
 };
