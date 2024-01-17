@@ -28,6 +28,7 @@ api.interceptors.response.use(
         return api.request(error.config);
       } catch (e) {
         console.log("Unauthorized");
+        console.log(e);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
       }

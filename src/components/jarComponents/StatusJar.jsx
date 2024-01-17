@@ -7,7 +7,7 @@ const StatusJar = ({ currentSum, goal }) => {
   return (
     <>
       <div className="fs-6 text-end">
-        <span>{Math.round(percentage)}%</span>
+        <span>{Math.round(percentage) || 0}%</span>
         <ProgressBar now={percentage} />
       </div>
       <div className="bg-gray p-1 text-center text-dark rounded-2 my-2 d-flex justify-content-between align-items-center">

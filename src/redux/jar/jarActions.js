@@ -18,7 +18,8 @@ const getAllTags = () => api.get("jars/tags/");
 
 const getJarStatistic = (jarId) => api.get(`jars/${jarId}/statistic/`);
 
-const createNewJar = (data) => api.post("jars/", data);
+const createNewJar = (data) =>
+  api.post("jars/", data);
 
 export const fetchGetJarById = (jarId) => {
   return async (dispatch) => {
@@ -119,10 +120,10 @@ export const fetchCreateNewJar = (data) => {
   return async (dispatch) => {
     try {
       const response = await createNewJar(data);
-      
+
       dispatch(initialJar(response?.data));
     } catch (e) {
-      console.log(e)
+      e.response.status !== 500 && console.log(e.response.data);
       const status = e.response?.status;
       const notFoundMessage = "Jar does not found for user";
       const message =
